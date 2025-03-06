@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain Floyd - The Pirate Legend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://i.postimg.cc/sf9Q2Qrz/IMG-20250306-110726-448.jpg');
+            background-size: cover; 
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            position: relative;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar a {
+            color: #ffd700 !important;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .navbar a:hover {
+            color: #ff6347;
+            text-decoration: underline;
+        }
+
+        .navbar-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 30px;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid gold;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero img:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 50px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+
+        .btn-custom {
+            background-color: gold;
+            color: black;
+            font-size: 22px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-custom:hover {
+            background-color: white;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        .story-section {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 50px 20px;
+            margin-top: 50px;
+            border-radius: 15px;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 2s ease-out, transform 2s ease-out;
+        }
+
+        .story-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-text {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            line-height: 1.8;
+            color: #ffd700;
+            margin-top: 20px;
+            text-align: justify;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="pirateMusic" autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">🏴‍☠️ Captain Floyd</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/adventures">Adventures</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero fadeIn">
+        <img src="https://pics.craiyon.com/2023-11-04/462c77ff76b14de3833341e415504027.webp" alt="Captain Floyd">
+        <h1>Captain George Floyd - The Pirate Legend</h1>
+        <p>The greatest goblin pirate to ever sail the seven seas!</p>
+        <a href="/about" class="btn btn-custom">Learn More</a>
+    </div>
+
+    <!-- Story Section -->
+    <div class="story-section" id="story">
+        <h2>Love on the High Seas</h2>
+        <div class="story-text">
+            <p><strong>Mamoune Rahmouni and Captain Floyd</strong></p>
+            <p>In the mystical seas of the Caribbean, the pirate Captain Floyd was a legend — a pirate who commanded the ocean with power and mystery. Yet, his heart had always been cold, his only love being the treasure he sought. That is, until one fateful evening, when Mamoune Rahmouni, a cunning and brave merchant, sailed into his world.</p>
+            <p>Mamoune was no ordinary man. He had a secret — a map that could lead to a treasure more valuable than gold, hidden in the heart of an island no one dared approach. But when Captain Floyd and Mamoune crossed paths, neither could have predicted the magic that would spark between them.</p>
+            <p>As the days turned into weeks aboard Captain Floyd’s ship, Mamoune taught him the beauty of love and adventure, while Captain Floyd showed him the freedom of the sea. Their bond grew stronger with every passing storm, every shared glance, and every treasure they discovered together.</p>
+            <p>But just as their bond blossomed, an ancient curse threatened to tear them apart. The map Mamoune held contained more than treasure — it held the power to bring both eternal life and eternal separation. Would their love survive the curse, or would the pirate and the merchant be separated forever?</p>
+            <p>Only the stars above knew their fate, but one thing was certain: their love would never be forgotten, for it was written in the winds of the Caribbean.</p>
+        </div>
+    </div>
+
+    <script>
+        var pirateMusic = document.getElementById('pirateMusic');
+        pirateMusic.volume = 0.1;
+
+        window.addEventListener('scroll', function() {
+            var storySection = document.getElementById('story');
+            var position = storySection.getBoundingClientRect();
+            if (position.top < window.innerHeight) {
+                storySection.classList.add('show');
+            }
+        });
+    </script>
+
+</body>
+</html>

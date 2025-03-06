@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird - Captain Floyd's Adventure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://wallpaperaccess.com/full/1364078.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Quicksand', sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar a {
+            color: #ffd700 !important;
+        }
+
+        .game-container {
+            position: relative;
+            width: 90%;
+            height: 400px;
+            background-color: #333;
+            overflow: hidden;
+            margin: 50px auto;
+            border-radius: 10px;
+        }
+
+        .bird {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://mega.nz/fa9516c9-bff7-426d-b540-d599fd1e2d58');
+            background-size: cover;
+            border-radius: 50%;
+            top: 200px;
+            left: 100px;
+        }
+
+        .knife {
+            position: absolute;
+            width: 50px;
+            height: 150px;
+            background-color: #f00;
+            top: 0;
+            left: 100%;
+            animation: moveKnives 2s linear infinite;
+        }
+
+        @keyframes moveKnives {
+            0% { left: 100%; }
+            100% { left: -50px; }
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .back-home {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: gold;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .back-home:hover {
+            background-color: #ffd700;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">🏴‍☠️ Captain Floyd</a>
+        </div>
+    </nav>
+
+    <!-- Flappy Bird Game Section -->
+    <div class="game-container">
+        <div class="bird" id="bird"></div>
+        <div class="knife" id="knife"></div>
+        <div class="score" id="score">Score: 0</div>
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href="/" class="back-home">Back to Home</a>
+
+    <script>
+        // Game Variables
+        var bird = document.getElementById('bird');
+        var gameContainer = document.querySelector('.game-container');
+        var scoreDisplay = document.getElementById('score');
+        var birdY = 200;
+        var gravity = 0.6;
+        var jumpPower = -15;
+        var gameInterval;
+        var knifeInterval;
+        var score = 0;
+        var isGameOver = false;
+
+        // Set initial speed and positions
+        var velocity = 0;
+        var knives = [];
+
+        // Bird controls
+        document.addEventListener('keydown', function(event) {
+            if (event.key === ' ') {
+                velocity = jumpPower;
+            }
+        });
+
+        function updateBirdPosition() {
+            velocity += gravity;
+            birdY += velocity;
+            bird.style.top = birdY + 'px';
+
+            // Prevent bird from flying out of bounds
+            if (birdY > gameContainer.offsetHeight - bird.offsetHeight) {
+                birdY = gameContainer.offsetHeight - bird.offsetHeight;
+                velocity = 0;
+            }
+
+            if (birdY < 0) {
+                birdY = 0;
+            }
+        }
+
+        // Knife Movement and Collision Detection
+        function createKnife() {
+            var knife = document.createElement('div');
+            knife.classList.add('knife');
+            knife.style.height = Math.floor(Math.random() * 200 + 100) + 'px';
+            knife.style.left = gameContainer.offsetWidth + 'px';
+            gameContainer.appendChild(knife);
+
+            knives.push(knife);
+        }
+
+        function moveKnives() {
+            knives.forEach(function(knife) {
+                var knifeX = parseInt(knife.style.left);
+                knife.style.left = knifeX - 5 + 'px';
+
+                if (knifeX < -50) {
+                    gameContainer.removeChild(knife);
+                    knives = knives.filter(function(k) { return k !== knife; });
+                    score++;
+                    scoreDisplay.textContent = 'Score: ' + score;
+                }
+
+                if (
+                    knifeX < 150 &&
+                    knifeX > 100 &&
+                    birdY + bird.offsetHeight > parseInt(knife.style.height)
+                ) {
+                    endGame();
+                }
+            });
+        }
+
+        function endGame() {
+            isGameOver = true;
+            clearInterval(gameInterval);
+            clearInterval(knifeInterval);
+            alert('Game Over! Final Score: ' + score);
+        }
+
+        // Game Loop
+        function gameLoop() {
+            if (!isGameOver) {
+                updateBirdPosition();
+                moveKnives();
+            }
+        }
+
+        // Start the Game
+        function startGame() {
+            gameInterval = setInterval(gameLoop, 20);
+            knifeInterval = setInterval(createKnife, 2000);
+        }
+
+        startGame();
+    </script>
+
+</body>
+</html>
